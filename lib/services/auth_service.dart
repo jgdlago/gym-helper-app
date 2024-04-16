@@ -31,4 +31,8 @@ class AuthService {
         print("Erro no login");
     }
   }
+
+  Future<void> logout() {
+    return _firebaseAuth.signOut();
+  }
 }

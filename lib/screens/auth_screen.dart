@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_helper_app/services/auth_service.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -10,6 +11,12 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   bool wantLogin = true;
   final _formKey = GlobalKey<FormState>();
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+
+  AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +47,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       height: 32
                     ),
                     TextFormField(
+                      controller: _emailController,
                       decoration: const InputDecoration(
                         label: Text("E-mail"),
                       ),
@@ -54,6 +62,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       },
                     ),
                     TextFormField(
+                      controller: _passwordController,
                       decoration: const InputDecoration(
                         label: Text("Senha"),
                       ),
@@ -88,6 +97,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               },
                             ),
                             TextFormField(
+                              controller: _nameController,
                               decoration: const InputDecoration(
                                 label: Text("Nome"),
                               ),
@@ -132,8 +142,16 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   mainButtonClick() {
+    String name = _nameController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
     if(_formKey.currentState!.validate()) {
-      print("válido");
+      if(wantLogin) {
+
+      } else {
+        _authService.userRegister(name: name, password: password, email: email);
+      }
     }
           print("inválido");
   }

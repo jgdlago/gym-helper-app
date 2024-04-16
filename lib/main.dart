@@ -34,7 +34,7 @@ class  RouterScreen extends StatelessWidget {
         stream: FirebaseAuth.instance.userChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return HomeScreen();
+            return HomeScreen(user: snapshot.data!);
           }
           return const AuthScreen();
         }

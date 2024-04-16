@@ -12,8 +12,8 @@ class ExerciseScreen extends StatelessWidget {
   ExerciseScreen({super.key, required this.exercise});
 
   final List<Feeling> feelingList = [
-    Feeling(id: "id", feeling: "feeling", date: "date"),
-    Feeling(id: "id", feeling: "feeling", date: "date"),
+    Feeling(id: "1", feeling: "Senti pouca ativação e dor nos ombros. 4 X 12 ", date: "02/03/2024"),
+    Feeling(id: "2", feeling: "Evolução consideravel ao fazer o movimento cadenciado e pressionando o peito 4x12", date: "16/04/2024"),
   ];
 
     Future<void> _takePhoto() async {

@@ -15,9 +15,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List<Exercise> exerciseList = [
-    Exercise(id: "id", name: "name", training: "training", howTo: "howTo", imageUrl: "imageUrl"),
-    Exercise(id: "id", name: "name", training: "training", howTo: "howTo", imageUrl: "imageUrl"),
-    Exercise(id: "id", name: "name", training: "training", howTo: "howTo", imageUrl: "imageUrl"),
+    Exercise(id: "1", name: "Supino reto", training: "Treino A", howTo: "Contrair as escápulas, logo apos estufar o peito e realizar o movimento cadenciado", imageUrl: "imageUrl"),
+    Exercise(id: "2", name: "Rosca direta", training: "Treino B", howTo: "Base firme com os braços a frente do tronco. Não subir o braço totalmente", imageUrl: "imageUrl"),
+    Exercise(id: "3", name: "Leg Press", training: "Treino C", howTo: "Joelhos na largura dos ombros, ", imageUrl: "imageUrl"),
+    Exercise(id: "1", name: "Triceps corda", training: "Treino A", howTo: "Inclinação de 30º", imageUrl: "imageUrl"),
+    Exercise(id: "2", name: "Stiff", training: "Treino B", howTo: "Focar na ativação do posterior e firmar o abdomen", imageUrl: "imageUrl"),
+    Exercise(id: "3", name: "Remada", training: "Treino C", howTo: "Coluna reta, firmar o abdomen e contrair as escapulas ", imageUrl: "imageUrl"),
   ];
 
   @override
@@ -49,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 (index) {
                     Exercise exercise = exerciseList[index];
                     return ListTile(
+
                       title: Text(exercise.name),
                       subtitle: Text(exercise.training),
                       onTap: () {

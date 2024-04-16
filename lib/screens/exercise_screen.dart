@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:gym_helper_app/models/exercise.dart';
 import 'package:gym_helper_app/models/feeling.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ExerciseScreen extends StatelessWidget {
   final Exercise exercise;
@@ -14,6 +15,19 @@ class ExerciseScreen extends StatelessWidget {
     Feeling(id: "id", feeling: "feeling", date: "date"),
     Feeling(id: "id", feeling: "feeling", date: "date"),
   ];
+
+    Future<void> _takePhoto() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      // Aqui você pode lidar com o arquivo de imagem capturado
+      print('Caminho da imagem: ${pickedFile.path}');
+    } else {
+      // Usuário cancelou a operação
+      print('Usuário cancelou a captura de foto.');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +77,7 @@ class ExerciseScreen extends StatelessWidget {
                     child: const Text("enviar foto"),
                   ),
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _takePhoto,
                       child: const Text("Tirar foto")
                   ),
                 ],

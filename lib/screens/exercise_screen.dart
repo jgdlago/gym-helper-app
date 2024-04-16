@@ -21,11 +21,20 @@ class ExerciseScreen extends StatelessWidget {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
 
     if (pickedFile != null) {
-      // Aqui você pode lidar com o arquivo de imagem capturado
       print('Caminho da imagem: ${pickedFile.path}');
     } else {
-      // Usuário cancelou a operação
       print('Usuário cancelou a captura de foto.');
+    }
+  }
+
+    Future<void> _pickImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      print('Caminho da imagem escolhida: ${pickedFile.path}');
+    } else {
+      print('Usuário cancelou a escolha da foto.');
     }
   }
 
@@ -73,7 +82,7 @@ class ExerciseScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: _pickImage,
                     child: const Text("enviar foto"),
                   ),
                   ElevatedButton(

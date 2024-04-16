@@ -9,6 +9,7 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   bool wantLogin = true;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class _AuthScreenState extends State<AuthScreen> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
+            key: _formKey,
             child: Center(
               child: SingleChildScrollView(
                 child: Column(
@@ -41,12 +43,30 @@ class _AuthScreenState extends State<AuthScreen> {
                       decoration: const InputDecoration(
                         label: Text("E-mail"),
                       ),
+                      validator: (String? value) {
+                        if (value == null) {
+                          return "Preencha o campo e-mail";
+                        }
+                        if (value.length < 5 || !value.contains("@")) {
+                          return "E-mail inválido";
+                        }
+                        return null;
+                      },
                     ),
                     TextFormField(
                       decoration: const InputDecoration(
                         label: Text("Senha"),
                       ),
                       obscureText: true,
+                      validator: (String? value) {
+                        if (value == null) {
+                          return "Preencha o campo senha";
+                        }
+                        if (value.length < 5) {
+                          return "senha inválida";
+                        }
+                        return null;
+                        },
                     ),
                     Visibility(
                         visible: !wantLogin,
@@ -57,11 +77,29 @@ class _AuthScreenState extends State<AuthScreen> {
                                 label: Text("Confirmação da senha"),
                               ),
                               obscureText: true,
+                              validator: (String? value) {
+                                if (value == null) {
+                                  return "Preencha o campo senha";
+                                }
+                                if (value.length < 5) {
+                                  return "senha inválida";
+                                }
+                                return null;
+                              },
                             ),
                             TextFormField(
                               decoration: const InputDecoration(
                                 label: Text("Nome"),
                               ),
+                              validator: (String? value) {
+                                if (value == null) {
+                                  return "Preencha o campo nome";
+                                }
+                                if (value.length < 5) {
+                                  return "Nome inválido";
+                                }
+                                return null;
+                              },
                             ),
                           ],
                         ),
@@ -70,7 +108,9 @@ class _AuthScreenState extends State<AuthScreen> {
                       height: 16
                     ),
                     ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          mainButtonClick();
+                        },
                         child: Text((wantLogin)? "Entrar" : "Cadastrar")
                     ),
                     const Divider(),
@@ -89,5 +129,12 @@ class _AuthScreenState extends State<AuthScreen> {
           ),
         ),
     );
+  }
+
+  mainButtonClick() {
+    if(_formKey.currentState!.validate()) {
+      print("válido");
+    }
+          print("inválido");
   }
 }

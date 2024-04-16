@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:gym_helper_app/models/exercise.dart';
+import 'package:gym_helper_app/models/feeling.dart';
 
 class ExerciseScreen extends StatelessWidget {
-  const ExerciseScreen({super.key});
+  ExerciseScreen({super.key});
+
+  final Exercise exercise = Exercise(
+      id: "id",
+      name: "name",
+      training: "training",
+      howTo: "howTo",
+      imageUrl: "imageUrl");
+
+  final List<Feeling> feelingList = [
+    Feeling(id: "id", feeling: "feeling", date: "date"),
+    Feeling(id: "id", feeling: "feeling", date: "date"),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Nome do Exercicio - Treino")),
+      appBar: AppBar(title: Text("${exercise.name} | ${exercise.training}")),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           print('teste');
@@ -15,8 +29,7 @@ class ExerciseScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             ElevatedButton(
               onPressed: () {},
@@ -28,8 +41,7 @@ class ExerciseScreen extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            const Text(
-              "Explicação da execução do exercicio"),
+            Text(exercise.howTo),
             Divider(),
             const Text("Como estou me sentindo?",
               style: TextStyle(
@@ -37,7 +49,13 @@ class ExerciseScreen extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            Text("Descrição da experiência do exercicio"),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(feelingList.length, (index) {
+                Feeling feeling = feelingList[index];
+                return Text(feeling.feeling);
+              }),
+            ),
           ],
         ),
       ),

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -23,7 +25,25 @@ class ExerciseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightGreenAccent,
-      appBar: AppBar(title: Text("${exercise.name} | ${exercise.training}")),
+      appBar: AppBar(
+        title: Column(children: [
+          Text(exercise.name,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)
+          ),
+          Text(exercise.training,
+          style: const TextStyle(fontSize: 15)
+          ),
+        ]),
+        centerTitle: true,
+        backgroundColor: Colors.lightGreenAccent,
+        elevation: 0,
+        toolbarHeight: 72,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(32)
+            )
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           print('teste');

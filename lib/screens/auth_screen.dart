@@ -148,7 +148,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
     if(_formKey.currentState!.validate()) {
       if(wantLogin) {
-
+        _authService.userLogin(email: email, password: password);
       } else {
         _authService.userRegister(name: name, password: password, email: email);
       }

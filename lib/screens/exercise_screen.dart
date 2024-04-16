@@ -7,14 +7,8 @@ import 'package:gym_helper_app/models/exercise.dart';
 import 'package:gym_helper_app/models/feeling.dart';
 
 class ExerciseScreen extends StatelessWidget {
-  ExerciseScreen({super.key});
-
-  final Exercise exercise = Exercise(
-      id: "id",
-      name: "name",
-      training: "training",
-      howTo: "howTo",
-      imageUrl: "imageUrl");
+  final Exercise exercise;
+  ExerciseScreen({super.key, required this.exercise});
 
   final List<Feeling> feelingList = [
     Feeling(id: "id", feeling: "feeling", date: "date"),

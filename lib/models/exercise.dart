@@ -1,4 +1,8 @@
-class Exercise {
+import 'package:flutter/foundation.dart';
+
+
+
+class Exercise with ChangeNotifier{
   String id;
   String name;
   String training;
@@ -12,6 +16,9 @@ class Exercise {
     required this.howTo,
     required this.imageUrl
   });
+
+ 
+
 
   Exercise.fromMap(Map<String, dynamic> map)
     :id = map["id"],

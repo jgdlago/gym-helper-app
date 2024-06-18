@@ -1,4 +1,6 @@
-class Feeling {
+import 'package:flutter/foundation.dart';
+
+class Feeling extends ChangeNotifier {
   String id;
   String feeling;
   String date;
@@ -17,5 +19,17 @@ class Feeling {
       "feeling": feeling,
       "date": date,
     };
+  }
+}
+
+class FeelingState extends ChangeNotifier {
+  final List<Feeling> feelings;
+
+  FeelingState(this.feelings);
+
+  void removeFeeling(Feeling feeling) {
+    feelings.remove(feeling);
+    notifyListeners();
+    
   }
 }

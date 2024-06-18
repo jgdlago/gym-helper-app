@@ -153,6 +153,5 @@ class _AuthScreenState extends State<AuthScreen> {
         _authService.userRegister(name: name, password: password, email: email);
       }
     }
-          print("inválido");
   }
 }

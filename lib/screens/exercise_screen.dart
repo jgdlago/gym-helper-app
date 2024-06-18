@@ -6,12 +6,13 @@ import 'package:flutter/painting.dart';
 import 'package:gym_helper_app/models/exercise.dart';
 import 'package:gym_helper_app/models/feeling.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class ExerciseScreen extends StatelessWidget {
   final Exercise exercise;
   ExerciseScreen({super.key, required this.exercise});
 
-  final List<Feeling> feelingList = [
+  var feelingList = [
     Feeling(id: "1", feeling: "Senti pouca ativação e dor nos ombros. 4 X 12 ", date: "02/03/2024"),
     Feeling(id: "2", feeling: "Evolução consideravel ao fazer o movimento cadenciado e pressionando o peito 4x12", date: "16/04/2024"),
   ];
@@ -40,7 +41,9 @@ class ExerciseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider<FeelingState>(
+      create: (context) => FeelingState(feelingList),
+      child: Scaffold(
       backgroundColor: Colors.lightGreenAccent,
       appBar: AppBar(
         title: Column(children: [
@@ -113,22 +116,27 @@ class ExerciseScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+             crossAxisAlignment: CrossAxisAlignment.start,
               children: List.generate(feelingList.length, (index) {
-                Feeling feeling = feelingList[index];
-                return ListTile(
-                  dense: true,
+                final feeling = feelingList[index];
+                return Consumer<FeelingState>(
+                  builder: (context, feelingState, child) => ListTile(
+                              dense: true,
                   contentPadding: EdgeInsets.zero,
                   title: Text(feeling.feeling),
                   subtitle: Text(feeling.date),
                   leading: const Icon(Icons.double_arrow),
-                  trailing: IconButton(icon: const Icon(Icons.delete, color: Colors.redAccent), onPressed: () => print("delete"),),
+                  trailing: IconButton(icon: const Icon(Icons.delete, color: Colors.redAccent),onPressed: () => feelingState.removeFeeling(feeling),),
+                ),
                 );
               }),
             ),
           ],
         ),
       ),
-    );
+    ),
+  );
   }
+  
+
 }
